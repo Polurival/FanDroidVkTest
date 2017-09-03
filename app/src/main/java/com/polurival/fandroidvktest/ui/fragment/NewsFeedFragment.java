@@ -4,19 +4,19 @@ package com.polurival.fandroidvktest.ui.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.Toast;
 
 import com.polurival.fandroidvktest.MyApplication;
 import com.polurival.fandroidvktest.R;
-import com.polurival.fandroidvktest.common.BaseAdapter;
+import com.polurival.fandroidvktest.common.utils.VkListHelper;
 import com.polurival.fandroidvktest.model.WallItem;
-import com.polurival.fandroidvktest.model.view.NewsFeedItemBodyViewModel;
+import com.polurival.fandroidvktest.model.view.BaseViewModel;
+import com.polurival.fandroidvktest.model.view.NewsItemBodyViewModel;
+import com.polurival.fandroidvktest.model.view.NewsItemFooterViewModel;
+import com.polurival.fandroidvktest.model.view.NewsItemHeaderViewModel;
 import com.polurival.fandroidvktest.rest.api.WallApi;
 import com.polurival.fandroidvktest.rest.model.request.WallGetRequestModel;
-import com.polurival.fandroidvktest.rest.model.response.WallGetResponse;
+import com.polurival.fandroidvktest.rest.model.response.GetWallResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,14 +30,10 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewsFeedFragment extends BaseFragment {
+public class NewsFeedFragment extends BaseFeedFragment {
 
     @Inject
     WallApi mWallApi;
-
-    private RecyclerView mRecyclerView;
-
-    private BaseAdapter mBaseAdapter;
 
     public NewsFeedFragment() {
         // Required empty public constructor
@@ -53,13 +49,17 @@ public class NewsFeedFragment extends BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mWallApi.get(new WallGetRequestModel(-86529522).toMap()).enqueue(new Callback<WallGetResponse>() {
+        mWallApi.get(new WallGetRequestModel(-86529522).toMap()).enqueue(new Callback<GetWallResponse>() {
             @Override
-            public void onResponse(Call<WallGetResponse> call, Response<WallGetResponse> response) {
+            public void onResponse(Call<GetWallResponse> call, Response<GetWallResponse> response) {
 
-                List<NewsFeedItemBodyViewModel> list = new ArrayList<NewsFeedItemBodyViewModel>();
-                for (WallItem item : response.body().response.getItems()) {
-                    list.add(new NewsFeedItemBodyViewModel(item));
+                List<WallItem> wallItems = VkListHelper.getWallList(response.body().response);
+                List<BaseViewModel> list = new ArrayList<>();
+
+                for (WallItem item : wallItems) {
+                    list.add(new NewsItemHeaderViewModel(item));
+                    list.add(new NewsItemBodyViewModel(item));
+                    list.add(new NewsItemFooterViewModel(item));
                 }
 
                 mBaseAdapter.addItems(list);
@@ -68,37 +68,14 @@ public class NewsFeedFragment extends BaseFragment {
             }
 
             @Override
-            public void onFailure(Call<WallGetResponse> call, Throwable t) {
+            public void onFailure(Call<GetWallResponse> call, Throwable t) {
                 t.printStackTrace();
             }
         });
     }
 
     @Override
-    protected int getMainContentLayout() {
-        return R.layout.fragment_feed;
-    }
-
-    @Override
     public int onCreateToolbarTitle() {
         return R.string.screen_name_news;
     }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        setUpRecyclerView(view);
-        setUpAdapter();
-    }
-
-    private void setUpRecyclerView(View rootView) {
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.rv_list);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-    }
-
-    private void setUpAdapter() {
-        mBaseAdapter = new BaseAdapter();
-        mRecyclerView.setAdapter(mBaseAdapter);
-    }
-
 }

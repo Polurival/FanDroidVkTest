@@ -6,6 +6,8 @@ import com.polurival.fandroidvktest.di.module.RestModule;
 import com.polurival.fandroidvktest.ui.activity.BaseActivity;
 import com.polurival.fandroidvktest.ui.activity.MainActivity;
 import com.polurival.fandroidvktest.ui.fragment.NewsFeedFragment;
+import com.polurival.fandroidvktest.ui.holder.NewsItemBodyHolder;
+import com.polurival.fandroidvktest.ui.holder.NewsItemFooterHolder;
 
 import javax.inject.Singleton;
 
@@ -26,4 +28,8 @@ public interface ApplicationComponent {
 
     //fragments
     void inject(NewsFeedFragment fragment);
+
+    //holders
+    void inject(NewsItemBodyHolder holder);
+    void inject(NewsItemFooterHolder holder);
 }

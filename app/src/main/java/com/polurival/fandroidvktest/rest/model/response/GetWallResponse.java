@@ -7,5 +7,5 @@ import com.polurival.fandroidvktest.model.WallItem;
  * on 20.08.2017.
  */
 
-public class WallGetResponse extends Full<BaseItemResponse<WallItem>> {
+public class GetWallResponse extends Full<ItemWithSendersResponse<WallItem>> {
 }

@@ -1,11 +1,15 @@
-
-package com.polurival.fandroidvktest.model;
+package com.polurival.fandroidvktest.model.attachment;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.vk.sdk.api.model.VKAttachments;
 
-public class Photo {
+/**
+ * Created by Polurival
+ * on 01.09.2017.
+ */
 
+public class Photo implements Attachment {
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -49,7 +53,8 @@ public class Photo {
     @Expose
     private String accessKey;
 
-    public Integer getId() {
+    @Override
+    public int getId() {
         return id;
     }
 
@@ -161,4 +166,8 @@ public class Photo {
         this.accessKey = accessKey;
     }
 
+    @Override
+    public String getType() {
+        return VKAttachments.TYPE_PHOTO;
+    }
 }

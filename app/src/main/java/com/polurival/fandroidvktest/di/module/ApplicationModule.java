@@ -3,7 +3,6 @@ package com.polurival.fandroidvktest.di.module;
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Typeface;
-import android.view.LayoutInflater;
 
 import javax.inject.Singleton;
 

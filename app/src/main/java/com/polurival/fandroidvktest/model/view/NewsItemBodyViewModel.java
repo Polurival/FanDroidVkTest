@@ -11,14 +11,24 @@ import com.polurival.fandroidvktest.ui.holder.NewsItemBodyHolder;
  * on 26.08.2017.
  */
 
-public class NewsFeedItemBodyViewModel extends BaseViewModel {
+public class NewsItemBodyViewModel extends BaseViewModel {
 
     private int mId;
     private String mText;
+    private String mAttachmentString;
+    private boolean mIsRepost;
 
-    public NewsFeedItemBodyViewModel(WallItem wallItem) {
+    public NewsItemBodyViewModel(WallItem wallItem) {
         mId = wallItem.getId();
-        mText = wallItem.getText();
+        mIsRepost = wallItem.haveSharedRepost();
+
+        if (mIsRepost) {
+            mText = wallItem.getSharedRepost().getText();
+            mAttachmentString = wallItem.getSharedRepost().getAttachmentsString();
+        } else {
+            mText = wallItem.getText();
+            mAttachmentString = wallItem.getAttachmentsString();
+        }
     }
 
     @Override
@@ -37,5 +47,9 @@ public class NewsFeedItemBodyViewModel extends BaseViewModel {
 
     public String getText() {
         return mText;
+    }
+
+    public String getAttachmentString() {
+        return mAttachmentString;
     }
 }
