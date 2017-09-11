@@ -4,12 +4,14 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.vk.sdk.api.model.VKAttachments;
 
+import io.realm.RealmObject;
+
 /**
  * Created by Polurival
  * on 01.09.2017.
  */
 
-public class Audio implements Attachment {
+public class Audio extends RealmObject implements Attachment {
     @SerializedName("id")
     @Expose
     private int id;

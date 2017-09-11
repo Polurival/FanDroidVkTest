@@ -1,6 +1,7 @@
 package com.polurival.fandroidvktest.di.module;
 
 import com.polurival.fandroidvktest.common.manager.MyFragmentManager;
+import com.polurival.fandroidvktest.common.manager.NetworkManager;
 
 import javax.inject.Singleton;
 
@@ -19,5 +20,11 @@ public class ManagerModule {
     @Provides
     public MyFragmentManager provideMyFragmentManager() {
         return new MyFragmentManager();
+    }
+
+    @Singleton
+    @Provides
+    public NetworkManager provideNetworkManager() {
+        return new NetworkManager();
     }
 }

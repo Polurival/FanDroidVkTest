@@ -8,6 +8,9 @@ import com.polurival.fandroidvktest.di.module.ApplicationModule;
 import com.polurival.fandroidvktest.di.module.ManagerModule;
 import com.vk.sdk.VKSdk;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+
 /**
  * Created by Polurival
  * on 17.08.2017.
@@ -24,6 +27,12 @@ public class MyApplication extends Application {
         initComponent();
 
         VKSdk.initialize(this);
+
+        Realm.init(this);
+        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        Realm.setDefaultConfiguration(realmConfiguration);
     }
 
     private void initComponent() {

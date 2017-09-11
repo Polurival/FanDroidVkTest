@@ -3,12 +3,14 @@ package com.polurival.fandroidvktest.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import io.realm.RealmObject;
+
 /**
  * Created by Polurival
  * on 27.08.2017.
  */
 
-public class Profile implements Owner {
+public class Profile extends RealmObject implements Owner {
 
     @SerializedName("id")
     @Expose

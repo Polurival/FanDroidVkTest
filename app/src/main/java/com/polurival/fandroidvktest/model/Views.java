@@ -4,7 +4,9 @@ package com.polurival.fandroidvktest.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Views {
+import io.realm.RealmObject;
+
+public class Views extends RealmObject {
 
     @SerializedName("count")
     @Expose
