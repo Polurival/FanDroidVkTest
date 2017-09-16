@@ -14,6 +14,9 @@ import com.polurival.fandroidvktest.ui.fragment.BaseFragment;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by Polurival
  * on 19.08.2017.
@@ -21,22 +24,25 @@ import javax.inject.Inject;
 
 public abstract class BaseActivity extends MvpAppCompatActivity {
 
-    protected ProgressBar mProgressBar;
-
     @Inject
     MyFragmentManager mMyFragmentManager;
+
+    @BindView(R.id.progress)
+    protected ProgressBar mProgressBar;
+
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_base);
+
+        ButterKnife.bind(this);
 
         MyApplication.getApplicationComponent().inject(this);
 
-        setContentView(R.layout.activity_base);
-
-        mProgressBar = (ProgressBar) findViewById(R.id.progress);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setSupportActionBar(mToolbar);
 
         FrameLayout parent = (FrameLayout) findViewById(R.id.main_wrapper);
         getLayoutInflater().inflate(getMainContentLayout(), parent);

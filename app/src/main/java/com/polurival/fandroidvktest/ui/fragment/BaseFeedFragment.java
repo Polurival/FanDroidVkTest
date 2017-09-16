@@ -18,6 +18,9 @@ import com.polurival.fandroidvktest.mvp.view.BaseFeedView;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by Polurival
  * on 03.09.2017.
@@ -25,10 +28,12 @@ import java.util.List;
 
 public abstract class BaseFeedFragment extends BaseFragment implements BaseFeedView {
 
-    private RecyclerView mRecyclerView;
+    @BindView(R.id.rv_list)
+    RecyclerView mRecyclerView;
 
     protected BaseAdapter mAdapter;
 
+    @BindView(R.id.swipe_refresh)
     protected SwipeRefreshLayout mSwipeRefreshLayout;
     protected ProgressBar mProgressBar;
 
@@ -38,18 +43,18 @@ public abstract class BaseFeedFragment extends BaseFragment implements BaseFeedV
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setUpSwipeToRefreshLayout(view);
+        ButterKnife.bind(this, view);
 
-        setUpRecyclerView(view);
+        setUpSwipeToRefreshLayout();
+
+        setUpRecyclerView();
         setUpAdapter();
 
         mBaseFeedPresenter = onCreateFeedPresenter();
         mBaseFeedPresenter.loadStart();
     }
 
-    private void setUpRecyclerView(View rootView) {
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.rv_list);
-
+    private void setUpRecyclerView() {
         MyLinearLayoutManager myLinearLayoutManager = new MyLinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(myLinearLayoutManager);
 
@@ -80,8 +85,7 @@ public abstract class BaseFeedFragment extends BaseFragment implements BaseFeedV
         return 0;
     }
 
-    private void setUpSwipeToRefreshLayout(View rootView) {
-        mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh);
+    private void setUpSwipeToRefreshLayout() {
         mSwipeRefreshLayout.setOnRefreshListener(() -> onCreateFeedPresenter().loadRefresh());
 
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);

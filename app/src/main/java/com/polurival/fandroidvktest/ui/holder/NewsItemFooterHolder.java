@@ -16,6 +16,9 @@ import com.polurival.fandroidvktest.model.view.counter.RepostCounterViewModel;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by Polurival
  * on 03.09.2017.
@@ -23,13 +26,26 @@ import javax.inject.Inject;
 
 public class NewsItemFooterHolder extends BaseViewHolder<NewsItemFooterViewModel> {
 
-    private TextView tvDate;
-    private TextView tvLikesIcon;
-    private TextView tvLikesCount;
-    private TextView tvCommentsIcon;
-    private TextView tvCommentsCount;
-    private TextView tvRepostsIcon;
-    private TextView tvRepostsCount;
+    @BindView(R.id.tv_date)
+    TextView tvDate;
+
+    @BindView(R.id.tv_likes_icon)
+    TextView tvLikesIcon;
+
+    @BindView(R.id.tv_likes_count)
+    TextView tvLikesCount;
+
+    @BindView(R.id.tv_comments_icon)
+    TextView tvCommentsIcon;
+
+    @BindView(R.id.tv_comments_count)
+    TextView tvCommentsCount;
+
+    @BindView(R.id.tv_reposts_icon)
+    TextView tvRepostsIcon;
+
+    @BindView(R.id.tv_reposts_count)
+    TextView tvRepostsCount;
 
     @Inject
     Typeface mGoogleFontTypeface;
@@ -39,18 +55,13 @@ public class NewsItemFooterHolder extends BaseViewHolder<NewsItemFooterViewModel
 
     public NewsItemFooterHolder(View itemView) {
         super(itemView);
+
+        ButterKnife.bind(this, itemView);
+
         MyApplication.getApplicationComponent().inject(this);
 
         mContext = itemView.getContext();
         mResources = mContext.getResources();
-
-        tvDate = (TextView) itemView.findViewById(R.id.tv_date);
-        tvLikesIcon = (TextView) itemView.findViewById(R.id.tv_likes_icon);
-        tvLikesCount = (TextView) itemView.findViewById(R.id.tv_likes_count);
-        tvCommentsIcon = (TextView) itemView.findViewById(R.id.tv_comments_icon);
-        tvCommentsCount = (TextView) itemView.findViewById(R.id.tv_comments_count);
-        tvRepostsIcon = (TextView) itemView.findViewById(R.id.tv_reposts_icon);
-        tvRepostsCount = (TextView) itemView.findViewById(R.id.tv_reposts_count);
 
         tvLikesIcon.setTypeface(mGoogleFontTypeface);
         tvCommentsIcon.setTypeface(mGoogleFontTypeface);

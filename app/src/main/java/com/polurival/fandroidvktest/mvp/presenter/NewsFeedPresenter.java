@@ -1,8 +1,10 @@
 package com.polurival.fandroidvktest.mvp.presenter;
 
 import com.arellomobile.mvp.InjectViewState;
+import com.polurival.fandroidvktest.CurrentUser;
 import com.polurival.fandroidvktest.MyApplication;
 import com.polurival.fandroidvktest.common.utils.VkListHelper;
+import com.polurival.fandroidvktest.consts.ApiConstants;
 import com.polurival.fandroidvktest.model.WallItem;
 import com.polurival.fandroidvktest.model.view.BaseViewModel;
 import com.polurival.fandroidvktest.model.view.NewsItemBodyViewModel;
@@ -19,9 +21,7 @@ import java.util.concurrent.Callable;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Function;
+import io.reactivex.ObservableTransformer;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import io.realm.Sort;
@@ -34,6 +34,9 @@ import io.realm.Sort;
 @InjectViewState
 public class NewsFeedPresenter extends BaseFeedPresenter<BaseFeedView> {
 
+    // для отображения записей текущего пользователя
+    private boolean mEnableIdFiltering = false;
+
     @Inject
     WallApi mWallApi;
 
@@ -41,10 +44,25 @@ public class NewsFeedPresenter extends BaseFeedPresenter<BaseFeedView> {
         MyApplication.getApplicationComponent().inject(this);
     }
 
+    public void setEnableIdFiltering(boolean enableIdFiltering) {
+        mEnableIdFiltering = enableIdFiltering;
+    }
+
+    protected ObservableTransformer<WallItem, WallItem> applyFilter() {
+        if (mEnableIdFiltering && CurrentUser.getId() != null) {
+            return baseItemObservable -> baseItemObservable.filter(
+                    wallItem -> CurrentUser.getId().equals(String.valueOf(wallItem.getFromId()))
+            );
+        } else {
+            return baseItemObservable -> baseItemObservable;
+        }
+    }
+
     @Override
     public Observable<BaseViewModel> onCreateLoadDataObservable(int count, int offset) {
-        return mWallApi.get(new WallGetRequestModel(-86529522, count, offset).toMap())
+        return mWallApi.get(new WallGetRequestModel(ApiConstants.MY_GROUP_ID, count, offset).toMap())
                 .flatMap(full -> Observable.fromIterable(VkListHelper.getWallList(full.response)))
+                .compose(applyFilter())
                 .doOnNext(this::saveToDb)
                 .flatMap(wallItem -> {
                     List<BaseViewModel> baseItems = new ArrayList<>();
@@ -60,6 +78,7 @@ public class NewsFeedPresenter extends BaseFeedPresenter<BaseFeedView> {
 
         return Observable.fromCallable(getListFromRealmCallable())
                 .flatMap(Observable::fromIterable)
+                .compose(applyFilter())
                 .flatMap(wallItem -> Observable.fromIterable(parsePojoModel(wallItem)));
     }
 

@@ -10,6 +10,9 @@ import com.polurival.fandroidvktest.model.view.NewsItemBodyViewModel;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by Polurival
  * on 26.08.2017.
@@ -17,18 +20,21 @@ import javax.inject.Inject;
 
 public class NewsItemBodyHolder extends BaseViewHolder<NewsItemBodyViewModel> {
 
-    private TextView tvText;
-    private TextView tvAttachments;
+    @BindView(R.id.tv_text)
+    TextView tvText;
+
+    @BindView(R.id.tv_attachments)
+    TextView tvAttachments;
 
     @Inject
     protected Typeface mFontGoogle;
 
     public NewsItemBodyHolder(View itemView) {
         super(itemView);
-        MyApplication.getApplicationComponent().inject(this);
 
-        tvText = (TextView) itemView.findViewById(R.id.tv_text);
-        tvAttachments = (TextView) itemView.findViewById(R.id.tv_attachments);
+        ButterKnife.bind(this, itemView);
+
+        MyApplication.getApplicationComponent().inject(this);
 
         if (tvAttachments != null) {
             tvAttachments.setTypeface(mFontGoogle);

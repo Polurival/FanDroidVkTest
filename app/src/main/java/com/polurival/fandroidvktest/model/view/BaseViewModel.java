@@ -27,7 +27,8 @@ public abstract class BaseViewModel {
     public enum LayoutTypes {
         NewsFeedItemHeader(R.layout.item_news_header),
         NewsFeedItemBody(R.layout.item_news_body),
-        NewsFeedItemFooter(R.layout.item_news_footer);
+        NewsFeedItemFooter(R.layout.item_news_footer),
+        Member(R.layout.item_member);
 
         private final int id;
 
