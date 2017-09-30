@@ -11,6 +11,8 @@ import com.polurival.fandroidvktest.mvp.view.MainView;
 import com.polurival.fandroidvktest.rest.api.UsersApi;
 import com.polurival.fandroidvktest.rest.model.request.UsersGetRequestModel;
 import com.polurival.fandroidvktest.ui.fragment.BaseFragment;
+import com.polurival.fandroidvktest.ui.fragment.BoardFragment;
+import com.polurival.fandroidvktest.ui.fragment.InfoFragment;
 import com.polurival.fandroidvktest.ui.fragment.MembersFragment;
 import com.polurival.fandroidvktest.ui.fragment.MyPostsFragment;
 import com.polurival.fandroidvktest.ui.fragment.NewsFeedFragment;
@@ -67,6 +69,12 @@ public class MainPresenter extends MvpPresenter<MainView> {
                 break;
             case 4:
                 fragment = new MembersFragment();
+                break;
+            case 5:
+                fragment = new BoardFragment();
+                break;
+            case 6:
+                fragment = new InfoFragment();
                 break;
         }
 

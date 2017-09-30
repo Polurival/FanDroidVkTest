@@ -39,6 +39,12 @@ public abstract class BaseFeedFragment extends BaseFragment implements BaseFeedV
 
     protected BaseFeedPresenter mBaseFeedPresenter;
 
+    private boolean isWithEndlessList;
+
+    public void setWithEndlessList(boolean withEndlessList) {
+        isWithEndlessList = withEndlessList;
+    }
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -54,18 +60,26 @@ public abstract class BaseFeedFragment extends BaseFragment implements BaseFeedV
         mBaseFeedPresenter.loadStart();
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        isWithEndlessList = true;
+    }
+
     private void setUpRecyclerView() {
         MyLinearLayoutManager myLinearLayoutManager = new MyLinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(myLinearLayoutManager);
 
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                if (myLinearLayoutManager.isOnNextPagePosition()) {
-                    mBaseFeedPresenter.loadNext(mAdapter.getRealItemCount());
+        if (isWithEndlessList) {
+            mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    if (myLinearLayoutManager.isOnNextPagePosition()) {
+                        mBaseFeedPresenter.loadNext(mAdapter.getRealItemCount());
+                    }
                 }
-            }
-        });
+            });
+        }
 
         ((SimpleItemAnimator) mRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
     }

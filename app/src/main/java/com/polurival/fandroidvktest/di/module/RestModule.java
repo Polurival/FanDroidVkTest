@@ -1,6 +1,7 @@
 package com.polurival.fandroidvktest.di.module;
 
 import com.polurival.fandroidvktest.rest.RestClient;
+import com.polurival.fandroidvktest.rest.api.BoardApi;
 import com.polurival.fandroidvktest.rest.api.GroupsApi;
 import com.polurival.fandroidvktest.rest.api.UsersApi;
 import com.polurival.fandroidvktest.rest.api.WallApi;
@@ -46,5 +47,11 @@ public class RestModule {
     @Provides
     public GroupsApi provideGroupsApi() {
         return mRestClient.createService(GroupsApi.class);
+    }
+
+    @Singleton
+    @Provides
+    public BoardApi provideBoardApi() {
+        return mRestClient.createService(BoardApi.class);
     }
 }

@@ -19,4 +19,6 @@ public class ApiConstants {
     public static final String DEFAULT_MEMBER_FIELDS = "name,photo_100";
 
     public static final int MY_GROUP_ID = -86529522;
+
+    public static final String DEFAULT_GROUP_FIELDS = "status,description,site,links,contacts";
 }

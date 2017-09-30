@@ -74,13 +74,14 @@ public class MainActivity extends BaseActivity implements MainView {
     @Override
     public void startSignIn() {
         VKSdk.login(this, ApiConstants.DEFAULT_LOGIN_SCOPE);
-        setUpDrawer();
     }
 
     @Override
     public void signedId() {
         Toast.makeText(this, "Current user id: " + CurrentUser.getId(), Toast.LENGTH_LONG).show();
         setContent(new NewsFeedFragment());
+
+        setUpDrawer();
     }
 
     @Override

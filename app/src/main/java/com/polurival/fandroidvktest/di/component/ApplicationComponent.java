@@ -4,6 +4,8 @@ import com.polurival.fandroidvktest.common.manager.NetworkManager;
 import com.polurival.fandroidvktest.di.module.ApplicationModule;
 import com.polurival.fandroidvktest.di.module.ManagerModule;
 import com.polurival.fandroidvktest.di.module.RestModule;
+import com.polurival.fandroidvktest.mvp.presenter.BoardPresenter;
+import com.polurival.fandroidvktest.mvp.presenter.InfoPresenter;
 import com.polurival.fandroidvktest.mvp.presenter.MainPresenter;
 import com.polurival.fandroidvktest.mvp.presenter.MembersPresenter;
 import com.polurival.fandroidvktest.mvp.presenter.NewsFeedPresenter;
@@ -41,6 +43,8 @@ public interface ApplicationComponent {
     void inject(MainPresenter presenter);
     void inject(NewsFeedPresenter presenter);
     void inject(MembersPresenter presenter);
+    void inject(BoardPresenter presenter);
+    void inject(InfoPresenter presenter);
 
     //managers
     void inject(NetworkManager manager);
