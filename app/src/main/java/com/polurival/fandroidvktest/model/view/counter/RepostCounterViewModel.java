@@ -1,6 +1,6 @@
 package com.polurival.fandroidvktest.model.view.counter;
 
-import com.polurival.fandroidvktest.model.Reposts;
+import com.polurival.fandroidvktest.model.countable.Reposts;
 
 /**
  * Created by Polurival

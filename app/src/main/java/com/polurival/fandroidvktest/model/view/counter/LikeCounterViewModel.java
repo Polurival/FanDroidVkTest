@@ -1,6 +1,6 @@
 package com.polurival.fandroidvktest.model.view.counter;
 
-import com.polurival.fandroidvktest.model.Likes;
+import com.polurival.fandroidvktest.model.countable.Likes;
 
 /**
  * Created by Polurival

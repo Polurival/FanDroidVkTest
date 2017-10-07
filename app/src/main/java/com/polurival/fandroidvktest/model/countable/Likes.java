@@ -1,5 +1,5 @@
 
-package com.polurival.fandroidvktest.model;
+package com.polurival.fandroidvktest.model.countable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -20,6 +20,10 @@ public class Likes extends RealmObject {
     @SerializedName("can_publish")
     @Expose
     private Integer canPublish;
+
+    public boolean isUserLikes() {
+        return userLikes == 1;
+    }
 
     public Integer getCount() {
         return count;

@@ -1,11 +1,12 @@
 
 package com.polurival.fandroidvktest.model;
 
-import java.util.ArrayList;
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.polurival.fandroidvktest.model.attachment.ApiAttachment;
+import com.polurival.fandroidvktest.model.countable.Comments;
+import com.polurival.fandroidvktest.model.countable.Likes;
+import com.polurival.fandroidvktest.model.countable.Reposts;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;

@@ -11,4 +11,6 @@
 
     <!-- для заливки фрагмента белым цветом -->
     <color name="colorDefaultWhite">#f5f5f5</color>
+
+    <color name="colorIcon2">#a9aeb1</color>
 </resources>

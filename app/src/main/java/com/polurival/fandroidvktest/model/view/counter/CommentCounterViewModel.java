@@ -1,6 +1,6 @@
 package com.polurival.fandroidvktest.model.view.counter;
 
-import com.polurival.fandroidvktest.model.Comments;
+import com.polurival.fandroidvktest.model.countable.Comments;
 
 /**
  * Created by Polurival

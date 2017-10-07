@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.polurival.fandroidvktest.R;
-import com.polurival.fandroidvktest.ui.holder.BaseViewHolder;
+import com.polurival.fandroidvktest.ui.view.holder.BaseViewHolder;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

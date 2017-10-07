@@ -1,4 +1,4 @@
-package com.polurival.fandroidvktest.ui.holder;
+package com.polurival.fandroidvktest.ui.view.holder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

@@ -1,4 +1,4 @@
-package com.polurival.fandroidvktest.ui.holder;
+package com.polurival.fandroidvktest.ui.view.holder;
 
 import android.content.Context;
 import android.content.res.Resources;

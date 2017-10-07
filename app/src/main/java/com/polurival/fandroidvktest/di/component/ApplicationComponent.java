@@ -9,11 +9,15 @@ import com.polurival.fandroidvktest.mvp.presenter.InfoPresenter;
 import com.polurival.fandroidvktest.mvp.presenter.MainPresenter;
 import com.polurival.fandroidvktest.mvp.presenter.MembersPresenter;
 import com.polurival.fandroidvktest.mvp.presenter.NewsFeedPresenter;
+import com.polurival.fandroidvktest.mvp.presenter.OpenedPostPresenter;
 import com.polurival.fandroidvktest.ui.activity.BaseActivity;
 import com.polurival.fandroidvktest.ui.activity.MainActivity;
 import com.polurival.fandroidvktest.ui.fragment.NewsFeedFragment;
-import com.polurival.fandroidvktest.ui.holder.NewsItemBodyHolder;
-import com.polurival.fandroidvktest.ui.holder.NewsItemFooterHolder;
+import com.polurival.fandroidvktest.ui.fragment.OpenedPostFragment;
+import com.polurival.fandroidvktest.ui.view.holder.NewsItemBodyHolder;
+import com.polurival.fandroidvktest.ui.view.holder.NewsItemFooterHolder;
+import com.polurival.fandroidvktest.ui.view.holder.attachment.ImageAttachmentHolder;
+import com.polurival.fandroidvktest.ui.view.holder.attachment.VideoAttachmentHolder;
 
 import javax.inject.Singleton;
 
@@ -34,10 +38,13 @@ public interface ApplicationComponent {
 
     //fragments
     void inject(NewsFeedFragment fragment);
+    void inject(OpenedPostFragment fragment);
 
     //holders
     void inject(NewsItemBodyHolder holder);
     void inject(NewsItemFooterHolder holder);
+    void inject(ImageAttachmentHolder holder);
+    void inject(VideoAttachmentHolder holder);
 
     //presenters
     void inject(MainPresenter presenter);
@@ -45,6 +52,8 @@ public interface ApplicationComponent {
     void inject(MembersPresenter presenter);
     void inject(BoardPresenter presenter);
     void inject(InfoPresenter presenter);
+
+    void inject(OpenedPostPresenter presenter);
 
     //managers
     void inject(NetworkManager manager);

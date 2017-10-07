@@ -1,7 +1,8 @@
-package com.polurival.fandroidvktest.model.attachment;
+package com.polurival.fandroidvktest.model.attachment.doc;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.polurival.fandroidvktest.model.attachment.Attachment;
 import com.vk.sdk.api.model.VKAttachments;
 
 import io.realm.RealmObject;
@@ -39,6 +40,9 @@ public class Doc extends RealmObject implements Attachment {
     @SerializedName("access_key")
     @Expose
     private String accessKey;
+    @SerializedName("preview")
+    @Expose
+    private Preview preview;
 
     @Override
     public int getId() {
@@ -116,5 +120,13 @@ public class Doc extends RealmObject implements Attachment {
 
     public void setAccessKey(String accessKey) {
         this.accessKey = accessKey;
+    }
+
+    public Preview getPreview() {
+        return preview;
+    }
+
+    public void setPreview(Preview preview) {
+        this.preview = preview;
     }
 }

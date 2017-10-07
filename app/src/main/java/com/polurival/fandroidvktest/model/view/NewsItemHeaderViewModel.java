@@ -3,8 +3,8 @@ package com.polurival.fandroidvktest.model.view;
 import android.view.View;
 
 import com.polurival.fandroidvktest.model.WallItem;
-import com.polurival.fandroidvktest.ui.holder.BaseViewHolder;
-import com.polurival.fandroidvktest.ui.holder.NewsItemHeaderHolder;
+import com.polurival.fandroidvktest.ui.view.holder.BaseViewHolder;
+import com.polurival.fandroidvktest.ui.view.holder.NewsItemHeaderHolder;
 
 /**
  * Created by Polurival

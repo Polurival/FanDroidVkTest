@@ -3,6 +3,8 @@ package com.polurival.fandroidvktest.model.attachment;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.polurival.fandroidvktest.model.attachment.doc.Doc;
+import com.polurival.fandroidvktest.model.attachment.video.Video;
 import com.vk.sdk.api.model.VKAttachments;
 
 import java.util.NoSuchElementException;

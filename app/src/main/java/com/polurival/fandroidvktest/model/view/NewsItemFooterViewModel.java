@@ -6,8 +6,8 @@ import com.polurival.fandroidvktest.model.WallItem;
 import com.polurival.fandroidvktest.model.view.counter.CommentCounterViewModel;
 import com.polurival.fandroidvktest.model.view.counter.LikeCounterViewModel;
 import com.polurival.fandroidvktest.model.view.counter.RepostCounterViewModel;
-import com.polurival.fandroidvktest.ui.holder.BaseViewHolder;
-import com.polurival.fandroidvktest.ui.holder.NewsItemFooterHolder;
+import com.polurival.fandroidvktest.ui.view.holder.BaseViewHolder;
+import com.polurival.fandroidvktest.ui.view.holder.NewsItemFooterHolder;
 
 /**
  * Created by Polurival

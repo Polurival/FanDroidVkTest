@@ -5,7 +5,7 @@ import android.widget.TextView;
 
 import com.polurival.fandroidvktest.R;
 import com.polurival.fandroidvktest.model.Group;
-import com.polurival.fandroidvktest.ui.holder.BaseViewHolder;
+import com.polurival.fandroidvktest.ui.view.holder.BaseViewHolder;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

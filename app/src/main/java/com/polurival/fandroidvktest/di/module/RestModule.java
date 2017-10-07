@@ -4,6 +4,7 @@ import com.polurival.fandroidvktest.rest.RestClient;
 import com.polurival.fandroidvktest.rest.api.BoardApi;
 import com.polurival.fandroidvktest.rest.api.GroupsApi;
 import com.polurival.fandroidvktest.rest.api.UsersApi;
+import com.polurival.fandroidvktest.rest.api.VideoApi;
 import com.polurival.fandroidvktest.rest.api.WallApi;
 
 import javax.inject.Singleton;
@@ -54,4 +55,8 @@ public class RestModule {
     public BoardApi provideBoardApi() {
         return mRestClient.createService(BoardApi.class);
     }
+
+    @Singleton
+    @Provides
+    public VideoApi provideVideoApi() { return mRestClient.createService(VideoApi.class); }
 }
