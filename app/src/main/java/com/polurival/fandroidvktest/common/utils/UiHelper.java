@@ -33,6 +33,9 @@ public class UiHelper {
         }
     }
 
+    /**
+     * добавляет строку «поделился» для репостов
+     */
     public void setUpTextViewWithMessage(TextView textView, String s, String messageIfEmpty) {
         String s1;
         int color;

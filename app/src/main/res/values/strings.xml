@@ -22,4 +22,7 @@
     <string name="screen_name_image">Image</string>
 
     <string name="screen_name_opened_post">Post</string>
+
+    <string name="screen_name_comments">Comments</string>
+    <string name="screen_name_opened_comment">Comment</string>
 </resources>

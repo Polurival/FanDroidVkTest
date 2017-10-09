@@ -3,9 +3,16 @@ package com.polurival.fandroidvktest.model.view;
 import android.view.View;
 import android.widget.TextView;
 
+import com.polurival.fandroidvktest.MyApplication;
 import com.polurival.fandroidvktest.R;
+import com.polurival.fandroidvktest.common.manager.MyFragmentManager;
+import com.polurival.fandroidvktest.model.Place;
 import com.polurival.fandroidvktest.model.Topic;
+import com.polurival.fandroidvktest.ui.activity.BaseActivity;
+import com.polurival.fandroidvktest.ui.fragment.TopicCommentsFragment;
 import com.polurival.fandroidvktest.ui.view.holder.BaseViewHolder;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -82,9 +89,12 @@ public class TopicViewModel extends BaseViewModel {
         @BindView(R.id.tv_comments_count)
         TextView tvComments;
 
+        @Inject
+        MyFragmentManager mFragmentManager;
+
         public TopicViewHolder(View itemView) {
             super(itemView);
-
+            MyApplication.getApplicationComponent().inject(this);
             ButterKnife.bind(this, itemView);
         }
 
@@ -92,6 +102,12 @@ public class TopicViewModel extends BaseViewModel {
         public void bindViewHolder(TopicViewModel topicViewModel) {
             tvTitle.setText(topicViewModel.getTitle());
             tvComments.setText(topicViewModel.getCommentsCount());
+
+            itemView.setOnClickListener(view ->
+            mFragmentManager.addFragment((BaseActivity) itemView.getContext(),
+                    TopicCommentsFragment.newInstance(new Place(String.valueOf(topicViewModel.getGroupId()),
+                            String.valueOf(topicViewModel.getId()))),
+                    R.id.main_wrapper));
         }
 
         @Override

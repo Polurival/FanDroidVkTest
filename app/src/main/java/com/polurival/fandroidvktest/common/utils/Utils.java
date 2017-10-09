@@ -128,4 +128,8 @@ public class Utils {
             }
         }
     }
+
+    public static String[] splitString(String s) {
+        return s.replaceAll("[^-?0-9]+", " ").trim().split(" ");
+    }
 }

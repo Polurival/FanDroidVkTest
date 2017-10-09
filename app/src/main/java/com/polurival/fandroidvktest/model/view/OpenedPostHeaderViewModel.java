@@ -6,6 +6,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.polurival.fandroidvktest.R;
 import com.polurival.fandroidvktest.common.utils.UiHelper;
+import com.polurival.fandroidvktest.model.CommentItem;
 import com.polurival.fandroidvktest.model.WallItem;
 import com.polurival.fandroidvktest.ui.view.holder.BaseViewHolder;
 
@@ -27,7 +28,6 @@ public class OpenedPostHeaderViewModel extends BaseViewModel {
 
     private String mText;
 
-
     public OpenedPostHeaderViewModel(WallItem wallItem) {
         this.mId = wallItem.getId();
 
@@ -35,6 +35,15 @@ public class OpenedPostHeaderViewModel extends BaseViewModel {
         this.mProfilePhoto = wallItem.getSenderPhoto();
 
         this.mText = wallItem.getText();
+    }
+
+    public OpenedPostHeaderViewModel(CommentItem commentItem) {
+        mId = commentItem.getId();
+
+        mProfileName = commentItem.getSenderName();
+        mProfilePhoto = commentItem.getSenderPhoto();
+
+        mText = commentItem.getDisplayText();
     }
 
     @Override
@@ -74,7 +83,6 @@ public class OpenedPostHeaderViewModel extends BaseViewModel {
         @BindView(R.id.tv_text)
         public TextView text;
 
-
         private OpenedPostHeaderHolder(View itemView) {
             super(itemView);
 
@@ -97,6 +105,5 @@ public class OpenedPostHeaderViewModel extends BaseViewModel {
             profileName.setText(null);
             text.setText(null);
         }
-
     }
 }

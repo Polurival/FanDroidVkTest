@@ -1,5 +1,6 @@
 package com.polurival.fandroidvktest.common.utils;
 
+import com.polurival.fandroidvktest.model.CommentItem;
 import com.polurival.fandroidvktest.model.Owner;
 import com.polurival.fandroidvktest.model.WallItem;
 import com.polurival.fandroidvktest.model.attachment.ApiAttachment;
@@ -87,7 +88,7 @@ public class VkListHelper {
                     }
                     break;
 
-                case "page":
+                case VKAttachments.TYPE_WIKI_PAGE:
                     attachmentVkItems.add(new PageAttachmentViewModel(attachment.getPage()));
                     break;
 
@@ -96,5 +97,25 @@ public class VkListHelper {
             }
         }
         return attachmentVkItems;
+    }
+
+    public static List<CommentItem> getCommentsList(ItemWithSendersResponse<CommentItem> response) {
+        return getCommentsList(response, false);
+    }
+
+    public static List<CommentItem> getCommentsList(ItemWithSendersResponse<CommentItem> response, boolean isFromTopic) {
+        List<CommentItem> commentItems = response.items;
+
+        for (CommentItem commentItem : commentItems) {
+            Owner sender = response.getSender(commentItem.getFromId());
+            commentItem.setSenderName(sender.getFullName());
+            commentItem.setSenderPhoto(sender.getPhoto());
+
+            commentItem.setIsFromTopic(isFromTopic);
+
+            commentItem.setAttachmentsString(Utils.convertAttachmentsToFontIcons(commentItem.getAttachments()));
+        }
+
+        return commentItems;
     }
 }
