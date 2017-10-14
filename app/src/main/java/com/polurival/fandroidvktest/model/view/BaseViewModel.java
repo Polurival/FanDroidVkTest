@@ -48,7 +48,9 @@ public abstract class BaseViewModel {
 
         CommentHeader(R.layout.item_comment_header),
         CommentBody(R.layout.item_comment_body),
-        CommentFooter(R.layout.item_comment_footer);
+        CommentFooter(R.layout.item_comment_footer),
+
+        CreatePostText(R.layout.item_create_post_text);
 
         private final int id;
 

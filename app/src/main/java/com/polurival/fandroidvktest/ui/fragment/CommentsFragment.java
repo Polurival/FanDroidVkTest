@@ -1,5 +1,6 @@
 package com.polurival.fandroidvktest.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -10,6 +11,7 @@ import com.polurival.fandroidvktest.R;
 import com.polurival.fandroidvktest.model.Place;
 import com.polurival.fandroidvktest.mvp.presenter.BaseFeedPresenter;
 import com.polurival.fandroidvktest.mvp.presenter.CommentsPresenter;
+import com.polurival.fandroidvktest.ui.activity.CreatePostActivity;
 
 import butterknife.ButterKnife;
 
@@ -44,6 +46,18 @@ public class CommentsFragment extends BaseFeedFragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getBaseActivity().getFab().setOnClickListener(view -> {
+            Intent intent = new Intent(getBaseActivity(), CreatePostActivity.class);
+            intent.putExtra("type", "comment");
+            intent.putExtra("owner_id", Integer.parseInt(mPlace.getOwnerId()));
+            intent.putExtra("id", Integer.parseInt(mPlace.getPostId()));
+            startActivityForResult(intent, 0);
+        });
+    }
+
+    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
@@ -64,5 +78,10 @@ public class CommentsFragment extends BaseFeedFragment {
     @Override
     public int onCreateToolbarTitle() {
         return R.string.screen_name_comments;
+    }
+
+    @Override
+    public boolean needFab() {
+        return true;
     }
 }

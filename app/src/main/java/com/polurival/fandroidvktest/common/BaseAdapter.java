@@ -2,6 +2,7 @@ package com.polurival.fandroidvktest.common;
 
 import android.support.v4.util.ArrayMap;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.ViewGroup;
 
 import com.polurival.fandroidvktest.model.view.BaseViewModel;
@@ -16,6 +17,8 @@ import java.util.List;
  */
 
 public class BaseAdapter extends RecyclerView.Adapter<BaseViewHolder<BaseViewModel>> {
+
+    private static final String TAG = BaseAdapter.class.getSimpleName();
 
     private List<BaseViewModel> mList = new ArrayList<>();
 
@@ -44,6 +47,7 @@ public class BaseAdapter extends RecyclerView.Adapter<BaseViewHolder<BaseViewMod
 
     @Override
     public int getItemCount() {
+        Log.d(TAG, "getItemCount return " + String.valueOf(mList.size()));
         return mList.size();
     }
 
@@ -83,6 +87,14 @@ public class BaseAdapter extends RecyclerView.Adapter<BaseViewHolder<BaseViewMod
                 count += 1;
             }
         }
+        Log.d(TAG, "getRealItemCount return " + String.valueOf(count));
         return count;
+    }
+
+    public void insertItem(BaseViewModel newItem) {
+        registerTypeInstance(newItem);
+
+        mList.add(newItem);
+        notifyItemInserted(getItemCount() - 1);
     }
 }

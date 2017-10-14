@@ -1,6 +1,7 @@
 package com.polurival.fandroidvktest.ui.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import com.polurival.fandroidvktest.mvp.presenter.BaseFeedPresenter;
 import com.polurival.fandroidvktest.mvp.presenter.NewsFeedPresenter;
 import com.polurival.fandroidvktest.rest.api.WallApi;
 import com.polurival.fandroidvktest.rest.model.request.WallGetRequestModel;
+import com.polurival.fandroidvktest.ui.activity.CreatePostActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +56,15 @@ public class NewsFeedFragment extends BaseFeedFragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getBaseActivity().getFab().setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), CreatePostActivity.class);
+            startActivityForResult(intent, 0);
+        });
+    }
+
+    @Override
     public int onCreateToolbarTitle() {
         return R.string.screen_name_news;
     }
@@ -61,5 +72,10 @@ public class NewsFeedFragment extends BaseFeedFragment {
     @Override
     protected BaseFeedPresenter onCreateFeedPresenter() {
         return mPresenter;
+    }
+
+    @Override
+    public boolean needFab() {
+        return true;
     }
 }
