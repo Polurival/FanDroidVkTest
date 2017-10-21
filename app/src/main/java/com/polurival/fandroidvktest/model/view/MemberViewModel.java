@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.polurival.fandroidvktest.R;
 import com.polurival.fandroidvktest.model.Member;
+import com.polurival.fandroidvktest.model.Profile;
 import com.polurival.fandroidvktest.ui.view.holder.BaseViewHolder;
 
 import butterknife.BindView;
@@ -30,6 +31,11 @@ public class MemberViewModel extends BaseViewModel {
         mGroupId = member.getGroupId();
         mPhoto = member.getPhoto();
         mFullName = member.getFullName();
+    }
+
+    public MemberViewModel (Profile profile) {
+        mPhoto = profile.getPhoto();
+        mFullName = profile.getFullName();
     }
 
     public int getId() {

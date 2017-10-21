@@ -60,7 +60,7 @@ public class NewsFeedPresenter extends BaseFeedPresenter<BaseFeedView> {
 
     @Override
     public Observable<BaseViewModel> onCreateLoadDataObservable(int count, int offset) {
-        return mWallApi.get(new WallGetRequestModel(ApiConstants.MY_GROUP_ID, count, offset).toMap())
+        return mWallApi.get(new WallGetRequestModel(ApiConstants.CURRENT_GROUP_ID, count, offset).toMap())
                 .flatMap(full -> Observable.fromIterable(VkListHelper.getWallList(full.response)))
                 .compose(applyFilter())
                 .doOnNext(this::saveToDb)

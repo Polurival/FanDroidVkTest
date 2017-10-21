@@ -10,8 +10,10 @@ import com.polurival.fandroidvktest.model.Profile;
 import com.polurival.fandroidvktest.mvp.view.MainView;
 import com.polurival.fandroidvktest.rest.api.UsersApi;
 import com.polurival.fandroidvktest.rest.model.request.UsersGetRequestModel;
+import com.polurival.fandroidvktest.ui.activity.SettingActivity;
 import com.polurival.fandroidvktest.ui.fragment.BaseFragment;
 import com.polurival.fandroidvktest.ui.fragment.BoardFragment;
+import com.polurival.fandroidvktest.ui.fragment.GroupRulesFragment;
 import com.polurival.fandroidvktest.ui.fragment.InfoFragment;
 import com.polurival.fandroidvktest.ui.fragment.MembersFragment;
 import com.polurival.fandroidvktest.ui.fragment.MyPostsFragment;
@@ -67,6 +69,9 @@ public class MainPresenter extends MvpPresenter<MainView> {
             case 2:
                 fragment = new MyPostsFragment();
                 break;
+            case 3:
+                getViewState().startActivityFromDrawer(SettingActivity.class);
+                return;
             case 4:
                 fragment = new MembersFragment();
                 break;
@@ -75,6 +80,9 @@ public class MainPresenter extends MvpPresenter<MainView> {
                 break;
             case 6:
                 fragment = new InfoFragment();
+                break;
+            case 7:
+                fragment = new GroupRulesFragment();
                 break;
         }
 

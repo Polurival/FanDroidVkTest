@@ -31,4 +31,18 @@
     <string name="message_not_published">Запись не опубликована. Возможно, у вас нет прав для публикации на стене группы</string>
     <string name="loading_completed">Загружено</string>
     <string name="loading_failed">Ошибка загрузки. Убедитесь, что имя файла не содержит пробелы и кириллицу</string>
+
+    <string name="message">Message</string>
+    <string name="vk_group_default_name">FandroidVKTest</string>
+
+    <string name="pref_push_notifications">Получать push-уведомления</string>
+
+    <string name="pref_push_notification_admin">От администратора</string>
+    <string name="pref_push_notification_members">От участников</string>
+    <string name="pref_push_notification_comment_replies">Ответы мне</string>
+    <string name="need_login">Для работы приложения небходимо авторизоваться!</string>
+    <string name="group_rules">http://www.fandroid.info/gruppa-vzaimopomoshhi-dlya-nachinayushhih-android-razrabotchikov-i-programmistov-osvoim-android-vmeste/</string>
+
+    <string name="title_links">Ссылки</string>
+    <string name="title_contacts">Контакты</string>
 </resources>

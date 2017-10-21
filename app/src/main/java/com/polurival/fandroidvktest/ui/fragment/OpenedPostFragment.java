@@ -45,6 +45,8 @@ public class OpenedPostFragment extends BaseFeedFragment implements OpenedPostVi
         super.onCreate(savedInstanceState);
         MyApplication.getApplicationComponent().inject(this);
 
+        setWithEndlessList(false);
+
         if (getArguments() != null) {
             this.id = getArguments().getInt("id");
         }

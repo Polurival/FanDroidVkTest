@@ -27,4 +27,10 @@ public class ManagerModule {
     public NetworkManager provideNetworkManager() {
         return new NetworkManager();
     }
+
+    /*@Singleton
+    @Provides
+    public MyPreferencesManager provideMyPreferenceManager(Context application) {
+        return new MyPreferencesManager(application);
+    }*/
 }

@@ -3,14 +3,14 @@ package com.polurival.fandroidvktest.mvp.presenter;
 import com.arellomobile.mvp.InjectViewState;
 import com.polurival.fandroidvktest.MyApplication;
 import com.polurival.fandroidvktest.consts.ApiConstants;
-import com.polurival.fandroidvktest.model.Group;
+import com.polurival.fandroidvktest.model.Profile;
 import com.polurival.fandroidvktest.model.view.BaseViewModel;
-import com.polurival.fandroidvktest.model.view.InfoContactsViewModel;
-import com.polurival.fandroidvktest.model.view.InfoLinksViewModel;
-import com.polurival.fandroidvktest.model.view.InfoStatusViewModel;
+import com.polurival.fandroidvktest.model.view.MemberViewModel;
 import com.polurival.fandroidvktest.mvp.view.BaseFeedView;
 import com.polurival.fandroidvktest.rest.api.GroupsApi;
+import com.polurival.fandroidvktest.rest.api.UsersApi;
 import com.polurival.fandroidvktest.rest.model.request.GroupsGetByIdRequestModel;
+import com.polurival.fandroidvktest.rest.model.request.UsersGetRequestModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,16 +23,19 @@ import io.realm.Realm;
 
 /**
  * Created by Polurival
- * on 30.09.2017.
+ * on 21.10.2017.
  */
 
 @InjectViewState
-public class InfoPresenter extends BaseFeedPresenter<BaseFeedView> {
+public class InfoContactsPresenter extends BaseFeedPresenter<BaseFeedView> {
 
     @Inject
     GroupsApi mGroupsApi;
 
-    public InfoPresenter() {
+    @Inject
+    UsersApi mUsersApi;
+
+    public InfoContactsPresenter() {
         MyApplication.getApplicationComponent().inject(this);
     }
 
@@ -40,31 +43,41 @@ public class InfoPresenter extends BaseFeedPresenter<BaseFeedView> {
     public Observable<BaseViewModel> onCreateLoadDataObservable(int count, int offset) {
         return mGroupsApi.getGroupById(new GroupsGetByIdRequestModel(ApiConstants.CURRENT_GROUP_ID).toMap())
                 .flatMap(listFull -> Observable.fromIterable(listFull.response))
+                .flatMap(group -> Observable.fromIterable(group.getContactList()))
+                .flatMap(contact -> mUsersApi.get(new UsersGetRequestModel(String.valueOf(contact.getUserId())).toMap()))
+                .flatMap(listFull -> Observable.fromIterable(listFull.response))
+                .doOnNext(profile -> profile.setContact(true))
                 .doOnNext(this::saveToDb)
-                .flatMap(group -> Observable.fromIterable(parsePojoModel(group)));
+                .flatMap(profile -> Observable.fromIterable(parsePojoModel(profile)));
     }
 
     @Override
     public Observable<BaseViewModel> onCreateRestoreDataObservable() {
         return Observable.fromCallable(getListFromRealmCallable())
-                .flatMap(group -> Observable.fromIterable(parsePojoModel(group)));
+                .flatMap(profile -> Observable.fromIterable(parsePojoModel(profile)));
     }
 
-    private List<BaseViewModel> parsePojoModel(Group group) {
+    private List<BaseViewModel> parsePojoModel(List<Profile> profileList) {
         List<BaseViewModel> items = new ArrayList<>();
-        items.add(new InfoStatusViewModel(group));
-        items.add(new InfoContactsViewModel());
-        items.add(new InfoLinksViewModel());
+        for (Profile profile : profileList) {
+            items.addAll(parsePojoModel(profile));
+        }
+        return items;
+    }
+
+    private List<BaseViewModel> parsePojoModel(Profile profile) {
+        List<BaseViewModel> items = new ArrayList<>();
+        items.add(new MemberViewModel(profile));
 
         return items;
     }
 
-    public Callable<Group> getListFromRealmCallable() {
+    public Callable<List<Profile>> getListFromRealmCallable() {
         return () -> {
             Realm realm = Realm.getDefaultInstance();
-            Group result = realm.where(Group.class)
-                    .equalTo("id", Math.abs(ApiConstants.CURRENT_GROUP_ID))
-                    .findFirst();
+            List<Profile> result = realm.where(Profile.class)
+                    .equalTo("isContact", true)
+                    .findAll();
             return realm.copyFromRealm(result);
         };
     }

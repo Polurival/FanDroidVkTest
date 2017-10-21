@@ -4,10 +4,9 @@ import com.arellomobile.mvp.InjectViewState;
 import com.polurival.fandroidvktest.MyApplication;
 import com.polurival.fandroidvktest.consts.ApiConstants;
 import com.polurival.fandroidvktest.model.Group;
+import com.polurival.fandroidvktest.model.attachment.Link;
 import com.polurival.fandroidvktest.model.view.BaseViewModel;
-import com.polurival.fandroidvktest.model.view.InfoContactsViewModel;
-import com.polurival.fandroidvktest.model.view.InfoLinksViewModel;
-import com.polurival.fandroidvktest.model.view.InfoStatusViewModel;
+import com.polurival.fandroidvktest.model.view.attachment.LinkAttachmentViewModel;
 import com.polurival.fandroidvktest.mvp.view.BaseFeedView;
 import com.polurival.fandroidvktest.rest.api.GroupsApi;
 import com.polurival.fandroidvktest.rest.model.request.GroupsGetByIdRequestModel;
@@ -23,16 +22,16 @@ import io.realm.Realm;
 
 /**
  * Created by Polurival
- * on 30.09.2017.
+ * on 21.10.2017.
  */
 
 @InjectViewState
-public class InfoPresenter extends BaseFeedPresenter<BaseFeedView> {
+public class InfoLinksPresenter extends BaseFeedPresenter<BaseFeedView> {
 
     @Inject
     GroupsApi mGroupsApi;
 
-    public InfoPresenter() {
+    public InfoLinksPresenter() {
         MyApplication.getApplicationComponent().inject(this);
     }
 
@@ -52,14 +51,13 @@ public class InfoPresenter extends BaseFeedPresenter<BaseFeedView> {
 
     private List<BaseViewModel> parsePojoModel(Group group) {
         List<BaseViewModel> items = new ArrayList<>();
-        items.add(new InfoStatusViewModel(group));
-        items.add(new InfoContactsViewModel());
-        items.add(new InfoLinksViewModel());
-
+        for (Link link : group.getLinks()) {
+            items.add(new LinkAttachmentViewModel(link));
+        }
         return items;
     }
 
-    public Callable<Group> getListFromRealmCallable() {
+    private Callable<Group> getListFromRealmCallable() {
         return () -> {
             Realm realm = Realm.getDefaultInstance();
             Group result = realm.where(Group.class)

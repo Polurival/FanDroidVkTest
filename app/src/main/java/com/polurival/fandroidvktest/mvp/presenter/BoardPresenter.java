@@ -43,14 +43,14 @@ public class BoardPresenter extends BaseFeedPresenter<BaseFeedView> {
 
     @Override
     public Observable<BaseViewModel> onCreateLoadDataObservable(int count, int offset) {
-        return mBoardApi.getTopics(new BoardGetTopicsRequestModel(ApiConstants.MY_GROUP_ID, count, offset).toMap())
+        return mBoardApi.getTopics(new BoardGetTopicsRequestModel(ApiConstants.CURRENT_GROUP_ID, count, offset).toMap())
                 .flatMap(new Function<Full<BaseItemResponse<Topic>>, ObservableSource<? extends Topic>>() {
                     @Override
                     public ObservableSource<? extends Topic> apply(@NonNull Full<BaseItemResponse<Topic>> baseItemResponseFull) throws Exception {
                         return Observable.fromIterable(baseItemResponseFull.response.getItems());
                     }
                 })
-                .doOnNext(topic -> topic.setGroupId(ApiConstants.MY_GROUP_ID))
+                .doOnNext(topic -> topic.setGroupId(ApiConstants.CURRENT_GROUP_ID))
                 .doOnNext(this::saveToDb)
                 .map(TopicViewModel::new);
     }
@@ -69,7 +69,7 @@ public class BoardPresenter extends BaseFeedPresenter<BaseFeedView> {
 
             Realm realm = Realm.getDefaultInstance();
             RealmResults<Topic> results = realm.where(Topic.class)
-                    .equalTo("groupId", ApiConstants.MY_GROUP_ID)
+                    .equalTo("groupId", ApiConstants.CURRENT_GROUP_ID)
                     .findAllSorted(sortFields, sortOrder);
 
             return realm.copyFromRealm(results);

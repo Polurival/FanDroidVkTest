@@ -12,6 +12,7 @@ import com.polurival.fandroidvktest.di.component.ApplicationComponent;
 import com.polurival.fandroidvktest.di.component.DaggerApplicationComponent;
 import com.polurival.fandroidvktest.di.module.ApplicationModule;
 import com.polurival.fandroidvktest.di.module.ManagerModule;
+import com.polurival.fandroidvktest.fcm.MyPreferencesManager;
 import com.vk.sdk.VKSdk;
 
 import io.realm.Realm;
@@ -46,6 +47,8 @@ public class MyApplication extends Application {
                 Glide.with(imageView.getContext()).load(uri).into(imageView);
             }
         });
+
+        MyPreferencesManager.getInstance().init(this);
     }
 
     private void initComponent() {

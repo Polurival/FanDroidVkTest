@@ -2,6 +2,7 @@ package com.polurival.fandroidvktest.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -21,6 +22,8 @@ import com.polurival.fandroidvktest.consts.ApiConstants;
 import com.polurival.fandroidvktest.model.Profile;
 import com.polurival.fandroidvktest.mvp.presenter.MainPresenter;
 import com.polurival.fandroidvktest.mvp.view.MainView;
+import com.polurival.fandroidvktest.rest.api.AccountApi;
+import com.polurival.fandroidvktest.rest.model.request.AccountRegisterDeviceRequest;
 import com.polurival.fandroidvktest.ui.fragment.BaseFragment;
 import com.polurival.fandroidvktest.ui.fragment.NewsFeedFragment;
 import com.vk.sdk.VKAccessToken;
@@ -31,10 +34,18 @@ import com.vk.sdk.api.VKError;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
 public class MainActivity extends BaseActivity implements MainView {
 
     @InjectPresenter
     MainPresenter mPresenter;
+
+    @Inject
+    AccountApi mAccountApi;
 
     private Drawer mDrawer;
 
@@ -82,6 +93,12 @@ public class MainActivity extends BaseActivity implements MainView {
         setContent(new NewsFeedFragment());
 
         setUpDrawer();
+
+        //регистрируем устройство на сервере ВК как получатель push-сообщений
+        mAccountApi.registerDevice(new AccountRegisterDeviceRequest(Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID)).toMap())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe();
     }
 
     @Override
@@ -105,6 +122,11 @@ public class MainActivity extends BaseActivity implements MainView {
     @Override
     public void showFragmentFromDrawer(BaseFragment baseFragment) {
         setContent(baseFragment);
+    }
+
+    @Override
+    public void startActivityFromDrawer(Class<?> act) {
+        startActivity(new Intent(MainActivity.this, act));
     }
 
     private void setUpDrawer() {

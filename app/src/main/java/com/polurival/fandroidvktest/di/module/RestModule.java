@@ -1,6 +1,7 @@
 package com.polurival.fandroidvktest.di.module;
 
 import com.polurival.fandroidvktest.rest.RestClient;
+import com.polurival.fandroidvktest.rest.api.AccountApi;
 import com.polurival.fandroidvktest.rest.api.BoardApi;
 import com.polurival.fandroidvktest.rest.api.GroupsApi;
 import com.polurival.fandroidvktest.rest.api.UsersApi;
@@ -59,4 +60,10 @@ public class RestModule {
     @Singleton
     @Provides
     public VideoApi provideVideoApi() { return mRestClient.createService(VideoApi.class); }
+
+    @Singleton
+    @Provides
+    public AccountApi provideAccountApi() {
+        return mRestClient.createService(AccountApi.class);
+    }
 }

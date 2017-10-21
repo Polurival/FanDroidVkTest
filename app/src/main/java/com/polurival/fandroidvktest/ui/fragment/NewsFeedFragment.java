@@ -9,25 +9,12 @@ import android.support.v4.app.Fragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.polurival.fandroidvktest.MyApplication;
 import com.polurival.fandroidvktest.R;
-import com.polurival.fandroidvktest.common.utils.VkListHelper;
-import com.polurival.fandroidvktest.model.view.BaseViewModel;
-import com.polurival.fandroidvktest.model.view.NewsItemBodyViewModel;
-import com.polurival.fandroidvktest.model.view.NewsItemFooterViewModel;
-import com.polurival.fandroidvktest.model.view.NewsItemHeaderViewModel;
 import com.polurival.fandroidvktest.mvp.presenter.BaseFeedPresenter;
 import com.polurival.fandroidvktest.mvp.presenter.NewsFeedPresenter;
 import com.polurival.fandroidvktest.rest.api.WallApi;
-import com.polurival.fandroidvktest.rest.model.request.WallGetRequestModel;
 import com.polurival.fandroidvktest.ui.activity.CreatePostActivity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.inject.Inject;
-
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * A simple {@link Fragment} subclass.

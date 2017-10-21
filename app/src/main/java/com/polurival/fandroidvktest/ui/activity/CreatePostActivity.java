@@ -64,8 +64,6 @@ public class CreatePostActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getFab().setVisibility(View.GONE);
-
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             mType = bundle.getString("type");
@@ -88,6 +86,8 @@ public class CreatePostActivity extends BaseActivity {
         getSupportActionBar().setTitle(R.string.new_message_title);
 
         mAttachments = new VKAttachments();
+
+        getFab().hide();
     }
 
     @Override
@@ -142,7 +142,7 @@ public class CreatePostActivity extends BaseActivity {
         if (mType != null && mType.equals("comment")) {
             o = new SendCommentEventOnSubscribe(mOwnerId, mId, mCreatePostTextViewModel.getMessage(), mAttachments);
         } else {
-            o = new SendCreatedPostEventOnSubscribe(ApiConstants.MY_GROUP_ID,
+            o = new SendCreatedPostEventOnSubscribe(ApiConstants.CURRENT_GROUP_ID,
                     mCreatePostTextViewModel.getMessage(), mAttachments);
         }
 

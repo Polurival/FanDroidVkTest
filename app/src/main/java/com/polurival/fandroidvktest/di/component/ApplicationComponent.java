@@ -6,9 +6,14 @@ import com.polurival.fandroidvktest.di.module.ManagerModule;
 import com.polurival.fandroidvktest.di.module.RestModule;
 import com.polurival.fandroidvktest.model.view.CommentBodyViewModel.CommentBodyViewHolder;
 import com.polurival.fandroidvktest.model.view.CommentFooterViewModel.CommentFooterHolder;
+import com.polurival.fandroidvktest.model.view.InfoContactsViewModel;
+import com.polurival.fandroidvktest.model.view.InfoLinksViewModel;
+import com.polurival.fandroidvktest.model.view.InfoLinksViewModel.InfoLinksViewHolder;
 import com.polurival.fandroidvktest.model.view.TopicViewModel.TopicViewHolder;
 import com.polurival.fandroidvktest.mvp.presenter.BoardPresenter;
 import com.polurival.fandroidvktest.mvp.presenter.CommentsPresenter;
+import com.polurival.fandroidvktest.mvp.presenter.InfoContactsPresenter;
+import com.polurival.fandroidvktest.mvp.presenter.InfoLinksPresenter;
 import com.polurival.fandroidvktest.mvp.presenter.InfoPresenter;
 import com.polurival.fandroidvktest.mvp.presenter.MainPresenter;
 import com.polurival.fandroidvktest.mvp.presenter.MembersPresenter;
@@ -19,6 +24,8 @@ import com.polurival.fandroidvktest.mvp.presenter.TopicCommentsPresenter;
 import com.polurival.fandroidvktest.ui.activity.BaseActivity;
 import com.polurival.fandroidvktest.ui.activity.MainActivity;
 import com.polurival.fandroidvktest.ui.fragment.CommentsFragment;
+import com.polurival.fandroidvktest.ui.fragment.InfoContactsFragment;
+import com.polurival.fandroidvktest.ui.fragment.InfoLinksFragment;
 import com.polurival.fandroidvktest.ui.fragment.NewsFeedFragment;
 import com.polurival.fandroidvktest.ui.fragment.OpenedCommentFragment;
 import com.polurival.fandroidvktest.ui.fragment.OpenedPostFragment;
@@ -57,6 +64,10 @@ public interface ApplicationComponent {
 
     void inject(TopicCommentsFragment fragment);
 
+    void inject(InfoContactsFragment fragment);
+
+    void inject(InfoLinksFragment fragment);
+
     //holders
     void inject(NewsItemBodyHolder holder);
 
@@ -71,6 +82,8 @@ public interface ApplicationComponent {
     void inject(CommentFooterHolder holder);
 
     void inject(TopicViewHolder holder);
+
+    void inject(InfoLinksViewHolder holder);
 
     //presenters
     void inject(MainPresenter presenter);
@@ -91,6 +104,12 @@ public interface ApplicationComponent {
 
     void inject(TopicCommentsPresenter presenter);
 
+    void inject(InfoContactsPresenter presenter);
+
+    void inject(InfoLinksPresenter presenter);
+
     //managers
     void inject(NetworkManager manager);
+
+    void inject(InfoContactsViewModel.InfoContactsViewHolder holder);
 }
