@@ -4,6 +4,9 @@ import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.polurival.fandroidvktest.MyApplication;
+
+import javax.inject.Inject;
 
 /**
  * Сервис, постоянно работающий в фоне и слушающий оповещения
@@ -13,9 +16,17 @@ import com.google.firebase.messaging.RemoteMessage;
  */
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
+
     private static final String TAG = "MyFMService";
 
-    //
+    @Inject
+    MyPreferencesManager mPreferencesManager;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        MyApplication.getApplicationComponent().inject(this);
+    }
 
     /**
      * выполняется когда приходит сообщение с сервера
@@ -39,17 +50,17 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         PushModel pushModel = PushUtils.parseFcmMessage(remoteMessage.getData()).toPushModel();
 
         if (pushModel.getType().equals(FcmMessage.TYPE_REPLY)
-                && !MyPreferencesManager.getInstance().getPushNotificationCommentReplies()) {
+                && !mPreferencesManager.getPushNotificationCommentReplies()) {
             return;
         }
 
         if (pushModel.getType().equals(FcmMessage.TYPE_COMMENT)
-                && !MyPreferencesManager.getInstance().getPushNotificationComment()) {
+                && !mPreferencesManager.getPushNotificationComment()) {
             return;
         }
 
         if (pushModel.getType().equals(FcmMessage.TYPE_NEW_POST)
-                && !MyPreferencesManager.getInstance().getPushNotificationPost()) {
+                && !mPreferencesManager.getPushNotificationPost()) {
             return;
         }
 

@@ -28,12 +28,12 @@ public class InfoFragment extends BaseFeedFragment {
         setWithEndlessList(false);
     }
 
-    @Override
+    /*@Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         ButterKnife.bind(this, view);
-    }
+    }*/
 
     @Override
     protected BaseFeedPresenter onCreateFeedPresenter() {

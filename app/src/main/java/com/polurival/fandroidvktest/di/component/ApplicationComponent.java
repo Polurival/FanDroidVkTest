@@ -4,10 +4,11 @@ import com.polurival.fandroidvktest.common.manager.NetworkManager;
 import com.polurival.fandroidvktest.di.module.ApplicationModule;
 import com.polurival.fandroidvktest.di.module.ManagerModule;
 import com.polurival.fandroidvktest.di.module.RestModule;
+import com.polurival.fandroidvktest.fcm.MyFirebaseMessagingService;
+import com.polurival.fandroidvktest.fcm.MyPreferencesManager;
 import com.polurival.fandroidvktest.model.view.CommentBodyViewModel.CommentBodyViewHolder;
 import com.polurival.fandroidvktest.model.view.CommentFooterViewModel.CommentFooterHolder;
-import com.polurival.fandroidvktest.model.view.InfoContactsViewModel;
-import com.polurival.fandroidvktest.model.view.InfoLinksViewModel;
+import com.polurival.fandroidvktest.model.view.InfoContactsViewModel.InfoContactsViewHolder;
 import com.polurival.fandroidvktest.model.view.InfoLinksViewModel.InfoLinksViewHolder;
 import com.polurival.fandroidvktest.model.view.TopicViewModel.TopicViewHolder;
 import com.polurival.fandroidvktest.mvp.presenter.BoardPresenter;
@@ -56,17 +57,17 @@ public interface ApplicationComponent {
     //fragments
     void inject(NewsFeedFragment fragment);
 
-    void inject(OpenedPostFragment fragment);
+    //void inject(OpenedPostFragment fragment);
 
     void inject(OpenedCommentFragment fragment);
 
-    void inject(CommentsFragment fragment);
+    //void inject(CommentsFragment fragment);
 
-    void inject(TopicCommentsFragment fragment);
+    //void inject(TopicCommentsFragment fragment);
 
-    void inject(InfoContactsFragment fragment);
+    //void inject(InfoContactsFragment fragment);
 
-    void inject(InfoLinksFragment fragment);
+    //void inject(InfoLinksFragment fragment);
 
     //holders
     void inject(NewsItemBodyHolder holder);
@@ -84,6 +85,8 @@ public interface ApplicationComponent {
     void inject(TopicViewHolder holder);
 
     void inject(InfoLinksViewHolder holder);
+
+    void inject(InfoContactsViewHolder holder);
 
     //presenters
     void inject(MainPresenter presenter);
@@ -111,5 +114,8 @@ public interface ApplicationComponent {
     //managers
     void inject(NetworkManager manager);
 
-    void inject(InfoContactsViewModel.InfoContactsViewHolder holder);
+    void inject(MyPreferencesManager manager);
+
+    //services
+    void inject(MyFirebaseMessagingService service);
 }

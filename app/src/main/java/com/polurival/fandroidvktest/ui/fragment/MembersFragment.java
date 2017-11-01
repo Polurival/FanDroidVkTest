@@ -21,7 +21,7 @@ public class MembersFragment extends BaseFeedFragment {
     @InjectPresenter
     MembersPresenter mPresenter;
 
-    @Override
+    /*@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
@@ -31,7 +31,7 @@ public class MembersFragment extends BaseFeedFragment {
         super.onViewCreated(view, savedInstanceState);
 
         ButterKnife.bind(this, view);
-    }
+    }*/
 
     @Override
     protected BaseFeedPresenter onCreateFeedPresenter() {

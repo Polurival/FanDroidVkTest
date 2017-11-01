@@ -21,18 +21,18 @@ public class BoardFragment extends BaseFeedFragment {
     @InjectPresenter
     BoardPresenter mPresenter;
 
-    @Override
+    /*@Override
     public void onCreate(Bundle savedInstanceState) {
         // TODO: 26.09.2017 проверить что будет, если убрать это переопределение
         super.onCreate(savedInstanceState);
-    }
+    }*/
 
-    @Override
+    /*@Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // TODO: 26.09.2017 проверить что будет, если убрать это переопределение
         ButterKnife.bind(this, view);
-    }
+    }*/
 
     @Override
     protected BaseFeedPresenter onCreateFeedPresenter() {

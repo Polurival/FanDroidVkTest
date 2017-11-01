@@ -108,7 +108,7 @@ public abstract class BaseFeedFragment extends BaseFragment implements BaseFeedV
 
     @Override
     public void showRefreshing() {
-        //mSwipeRefreshLayout.setRefreshing(true);
+        mSwipeRefreshLayout.setRefreshing(true);
     }
 
     @Override

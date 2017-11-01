@@ -31,14 +31,14 @@ public class InfoContactsFragment extends BaseFeedFragment {
         setWithEndlessList(false);
     }
 
-    @Override
+    /*@Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         MyApplication.getApplicationComponent().inject(this);
 
         ButterKnife.bind(this, view);
-    }
+    }*/
 
     @Override
     protected BaseFeedPresenter onCreateFeedPresenter() {

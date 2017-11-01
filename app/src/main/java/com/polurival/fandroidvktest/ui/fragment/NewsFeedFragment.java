@@ -37,10 +37,10 @@ public class NewsFeedFragment extends BaseFeedFragment {
         MyApplication.getApplicationComponent().inject(this);
     }
 
-    @Override
+    /*@Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-    }
+    }*/
 
     @Override
     public void onResume() {

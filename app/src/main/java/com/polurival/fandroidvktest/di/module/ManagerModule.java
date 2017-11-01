@@ -1,7 +1,10 @@
 package com.polurival.fandroidvktest.di.module;
 
+import android.content.Context;
+
 import com.polurival.fandroidvktest.common.manager.MyFragmentManager;
 import com.polurival.fandroidvktest.common.manager.NetworkManager;
+import com.polurival.fandroidvktest.fcm.MyPreferencesManager;
 
 import javax.inject.Singleton;
 
@@ -28,9 +31,9 @@ public class ManagerModule {
         return new NetworkManager();
     }
 
-    /*@Singleton
+    @Singleton
     @Provides
-    public MyPreferencesManager provideMyPreferenceManager(Context application) {
-        return new MyPreferencesManager(application);
-    }*/
+    public MyPreferencesManager provideMyPreferenceManager() {
+        return new MyPreferencesManager();
+    }
 }

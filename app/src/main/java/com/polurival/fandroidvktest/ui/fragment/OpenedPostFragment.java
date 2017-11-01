@@ -43,7 +43,7 @@ public class OpenedPostFragment extends BaseFeedFragment implements OpenedPostVi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MyApplication.getApplicationComponent().inject(this);
+        //MyApplication.getApplicationComponent().inject(this);
 
         setWithEndlessList(false);
 

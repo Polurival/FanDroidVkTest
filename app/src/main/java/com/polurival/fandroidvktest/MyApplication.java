@@ -48,7 +48,7 @@ public class MyApplication extends Application {
             }
         });
 
-        MyPreferencesManager.getInstance().init(this);
+        //MyPreferencesManager.getInstance().init(this);
     }
 
     private void initComponent() {

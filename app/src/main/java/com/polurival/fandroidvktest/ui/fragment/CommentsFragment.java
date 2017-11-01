@@ -40,7 +40,7 @@ public class CommentsFragment extends BaseFeedFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MyApplication.getApplicationComponent().inject(this);
+        //MyApplication.getApplicationComponent().inject(this);
 
         mPlace = new Place(getArguments());
     }
@@ -57,17 +57,16 @@ public class CommentsFragment extends BaseFeedFragment {
         });
     }
 
-    @Override
+    /*@Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-    }
+    }*/
 
-    @Override
+    /*@Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-    }
+    }*/
 
     @Override
     protected BaseFeedPresenter onCreateFeedPresenter() {

@@ -35,7 +35,7 @@ public class OpenedCommentFragment extends BaseFeedFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MyApplication.getApplicationComponent().inject(this);
+        //MyApplication.getApplicationComponent().inject(this);
 
         setWithEndlessList(false);
 
@@ -44,11 +44,11 @@ public class OpenedCommentFragment extends BaseFeedFragment {
         }
     }
 
-    @Override
+    /*@Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-    }
+    }*/
 
     @Override
     protected int getMainContentLayout() {
